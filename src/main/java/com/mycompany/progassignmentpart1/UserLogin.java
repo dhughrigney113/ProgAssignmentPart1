@@ -56,7 +56,7 @@ public class UserLogin {
     
     public String returnUserLoginStaus (boolean loginSuccessful, boolean loginUnsuccessful){
        if (loginSuccessful){
-             return "Welcome <user first name>, <user last name> it is great to see you again.";                                                         
+             return "Welcome " + name + " , " + surname+ it is great to see you again.";                                                         
             }else if (loginUnsuccessful){
             return "Username or password incorrect, Please try again";
             }else {

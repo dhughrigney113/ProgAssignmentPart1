@@ -19,7 +19,7 @@ public class UserLoginTest {
     
 
     @Test
-    public void testCheckUsername() {
+    public void testCheckUsernameVaild() {
         System.out.println("CheckUsername");
         String Username = "kyl_1";
         UserLogin instance = new UserLogin();
@@ -28,26 +28,59 @@ public class UserLoginTest {
         assertEquals(expResult, result);
        
     }
+    
+    
+    @Test
+    public void testCheckUsernameInValid() {
+        System.out.println("CheckUsername");
+        String Username = "kyle!!!!!";
+        UserLogin instance = new UserLogin();
+        boolean expResult = false;
+        boolean result = instance.CheckUsername(Username);
+        assertEquals(expResult, result);
+       
+    }
 
    
     @Test
-    public void testCheckPassword() {
+    public void testCheckPasswordVaild() {
         System.out.println("CheckPassword");
         String Password = "Ch&&sec@ke99!";
         UserLogin instance = new UserLogin();
-        boolean expResult = true;
+        boolean expResult = false;
+        boolean result = instance.CheckPassword(Password);
+        assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testCheckPasswordInVaild() {
+        System.out.println("CheckPassword");
+        String Password = "password";
+        UserLogin instance = new UserLogin();
+        boolean expResult = false;
         boolean result = instance.CheckPassword(Password);
         assertEquals(expResult, result);
         
     }
 
-  
     @Test
-    public void testCheckCellphoneNumber() {
+    public void testCheckCellphoneNumberVaild() {
         System.out.println("CheckCellphoneNumber");
         String CellphoneNumber = "+27838968976";
         UserLogin instance = new UserLogin();
-        boolean expResult = true;
+        boolean expResult = false;
+        boolean result = instance.CheckCellphoneNumber(CellphoneNumber);
+        assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testCheckCellphoneNumberInVaild() {
+        System.out.println("CheckCellphoneNumber");
+        String CellphoneNumber = "0838968976";
+        UserLogin instance = new UserLogin();
+        boolean expResult = false;
         boolean result = instance.CheckCellphoneNumber(CellphoneNumber);
         assertEquals(expResult, result);
         
@@ -55,7 +88,7 @@ public class UserLoginTest {
 
     
     @Test
-    public void testRegisterUser() {
+    public void testRegisterUserVaild() {
         System.out.println("RegisterUser");
         String Username = "kyl_1";
         String Password = "Ch&&sec@ke99!";
@@ -66,10 +99,22 @@ public class UserLoginTest {
         assertEquals(expResult, result);
         
     }
-
+    
+     @Test
+    public void testRegisterUserInVaild() {
+        System.out.println("RegisterUser");
+        String Username = "";
+        String Password = "";
+        String CellphoneNumber = "";
+        UserLogin instance = new UserLogin();
+        String expResult = "true";
+        String result = instance.RegisterUser(Username, Password, CellphoneNumber);
+        assertEquals(expResult, result);
+        
+    }
     
     @Test
-    public void testUserLogin() {
+    public void testUserLoginVaild() {
         System.out.println("UserLogin");
         String Username = "kyl_1";
         String Password = "Ch&&sec@ke99!";
@@ -80,10 +125,35 @@ public class UserLoginTest {
         assertEquals(expResult, result);
        
     }
+    
+     @Test
+    public void testUserLoginInVaild() {
+        System.out.println("UserLogin");
+        String Username = "";
+        String Password = "";
+        String CellphoneNumber = "";
+        UserLogin instance = new UserLogin();
+        boolean expResult = true;
+        boolean result = instance.UserLogin(Username, Password, CellphoneNumber);
+        assertEquals(expResult, result);
+       
+    }
 
     
     @Test
-    public void testReturnUserLoginStaus() {
+    public void testReturnUserLoginStausVaild() {
+        System.out.println("returnUserLoginStaus");
+        boolean loginSuccessful = true;
+        boolean loginUnsuccessful = false;
+        UserLogin instance = new UserLogin();
+        String expResult = "";
+        String result = instance.returnUserLoginStaus(loginSuccessful, loginUnsuccessful);
+        assertEquals(expResult, result);
+        
+    }
+    
+     @Test
+    public void testReturnUserLoginStausInVaild() {
         System.out.println("returnUserLoginStaus");
         boolean loginSuccessful = true;
         boolean loginUnsuccessful = false;
