@@ -17,7 +17,13 @@ public class ProgAssignmentPart1 {
         Scanner input = new Scanner(System.in);
          UserLogin obj = new UserLogin();
          
-         System.out.println("");
+         System.out.println("=========REGISTRATION============");
+         System.out.println("Hi there ,Please Enter Your Name");
+         String Name = input.nextLine();
+         
+         System.out.println("Hi there ,Please Enter Your Surname");
+         String Surname = input.nextLine();
+         
         
         System.out.println("Hi Please Enter Your Username");
         String Username = input.next();

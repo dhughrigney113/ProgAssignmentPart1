@@ -50,8 +50,14 @@ public class UserLogin {
     }
     
     public boolean UserLogin(String Username, String Password, String CellphoneNumber){
-       //if (Username.equals(Username))
-       //if (Password.equals(Password))
+       this.Username = Username;
+       this.Password = Password;
+       this.CellphoneNumber = CellphoneNumber;
+       
+       if(this.Username == null || this.Password == null){
+         return false;  
+       }
+       
        return this.Username.equals(Username) && this.Password.equals(Password);
     }
     
