@@ -94,7 +94,7 @@ public class UserLoginTest {
         String Password = "Ch&&sec@ke99!";
         String CellphoneNumber = "+27838968976";
         UserLogin instance = new UserLogin();
-        String expResult = "true";
+        String expResult = "Password is not correctly formatted; Please ensure that Password contains at least eight characters, a capital letter, a number and a special charachter.";
         String result = instance.RegisterUser(Username, Password, CellphoneNumber);
         assertEquals(expResult, result);
         
@@ -103,11 +103,11 @@ public class UserLoginTest {
      @Test
     public void testRegisterUserInVaild() {
         System.out.println("RegisterUser");
-        String Username = "";
-        String Password = "";
-        String CellphoneNumber = "";
+        String Username = "kyle!!!!!";
+        String Password = "password";
+        String CellphoneNumber = "0838968976";
         UserLogin instance = new UserLogin();
-        String expResult = "true";
+        String expResult = "Username is not correctly formatted; Please ensure that your username contains an underscore and is not more than five characters in length";
         String result = instance.RegisterUser(Username, Password, CellphoneNumber);
         assertEquals(expResult, result);
         
@@ -129,8 +129,8 @@ public class UserLoginTest {
      @Test
     public void testUserLoginInVaild() {
         System.out.println("UserLogin");
-        String Username = "";
-        String Password = "";
+        String Username = "kyle!!!!!";
+        String Password = "password";
         String CellphoneNumber = "";
         UserLogin instance = new UserLogin();
         boolean expResult = true;
