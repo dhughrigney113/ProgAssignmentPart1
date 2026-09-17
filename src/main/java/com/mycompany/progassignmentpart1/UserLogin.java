@@ -13,6 +13,8 @@ public class UserLogin {
     public String Username;
     public String Password;
     public String CellphoneNumber;
+    private String Name;
+    private String Surname;
     
     public boolean CheckUsername (String Username){
       if (Username.contains("_") && Username.length()==5){
@@ -56,7 +58,7 @@ public class UserLogin {
     
     public String returnUserLoginStaus (boolean loginSuccessful, boolean loginUnsuccessful){
        if (loginSuccessful){
-             return "Welcome " + name + " , " + surname+ it is great to see you again.";                                                         
+             return "Welcome " + Name + " , " + Surname + "it is great to see you again.";                                                         
             }else if (loginUnsuccessful){
             return "Username or password incorrect, Please try again";
             }else {
