@@ -13,8 +13,8 @@ public class UserLogin {
     public String Username;
     public String Password;
     public String CellphoneNumber;
-    private String Name;
-    private String Surname;
+    public String Name;
+    public String Surname;
     
     public boolean CheckUsername (String Username){
       if (Username.contains("_") && Username.length()==5){
@@ -25,11 +25,19 @@ public class UserLogin {
     }
     
     public boolean CheckPassword (String Password){
-      if (Password.contains("A-Z" + "0-9" + "^a-zA-z0-9") && Password.length()==8){
-          return true;
-        }else{
-          return false;
-      }  
+      //if (Password.contains("A-Z" + "0-9" + "^a-zA-z0-9") && Password.length()==8){
+          //return true;
+       // }else{
+         // return false;
+     // } 
+     
+       boolean hasLength = Password.length() >=8;
+       boolean hasCapital =Password.contains("A-Z");
+       boolean hasNumber = Password.contains("0-9");
+       boolean hasSpecial = Password.contains("^a-zA-z0-9");
+       return hasLength && hasCapital && hasNumber && hasSpecial;
+     
+     
     }
     
     public boolean CheckCellphoneNumber (String CellphoneNumber){
@@ -54,7 +62,7 @@ public class UserLogin {
        this.Password = Password;
        this.CellphoneNumber = CellphoneNumber;
        
-       if(this.Username == null || this.Password == null){
+       if(this.Username == null && this.Password == null){
          return false;  
        }
        
@@ -62,9 +70,9 @@ public class UserLogin {
     }
     
     
-    public String returnUserLoginStaus (boolean loginSuccessful, boolean loginUnsuccessful){
+    public String returnUserLoginStaus (boolean loginSuccessful, boolean loginUnsuccessful, String Name, String Surname){
        if (loginSuccessful){
-             return "Welcome " + Name + " , " + Surname + "it is great to see you again.";                                                         
+             return "Welcome " + Name + " , " + Surname + " it is great to see you again.";                                                         
             }else if (loginUnsuccessful){
             return "Username or password incorrect, Please try again";
             }else {

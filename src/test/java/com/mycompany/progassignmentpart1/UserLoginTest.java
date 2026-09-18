@@ -128,10 +128,10 @@ public class UserLoginTest {
     
      @Test
     public void testUserLoginInVaild() {
-        System.out.println("UserLogin");
+        System.out.println("UserLoginInVaild");
         String Username = "kyle!!!!!";
         String Password = "password";
-        String CellphoneNumber = "";
+        String CellphoneNumber = "0838968976";
         UserLogin instance = new UserLogin();
         boolean expResult = true;
         boolean result = instance.UserLogin(Username, Password, CellphoneNumber);
@@ -141,13 +141,15 @@ public class UserLoginTest {
 
     
     @Test
-    public void testReturnUserLoginStausVaild() {
+     public void testReturnUserLoginStausVaild() {
         System.out.println("returnUserLoginStaus");
         boolean loginSuccessful = true;
         boolean loginUnsuccessful = false;
         UserLogin instance = new UserLogin();
-        String expResult = "";
-        String result = instance.returnUserLoginStaus(loginSuccessful, loginUnsuccessful);
+        String Name ="Name";
+        String Surname = "Surname";
+        String expResult = "Welcome " + Name + " , " + Surname + " it is great to see you again.";
+        String result = instance.returnUserLoginStaus(loginSuccessful, loginUnsuccessful, Name, Surname);
         assertEquals(expResult, result);
         
     }
@@ -158,8 +160,10 @@ public class UserLoginTest {
         boolean loginSuccessful = true;
         boolean loginUnsuccessful = false;
         UserLogin instance = new UserLogin();
-        String expResult = "";
-        String result = instance.returnUserLoginStaus(loginSuccessful, loginUnsuccessful);
+         String Name ="Name";
+        String Surname = "Surname";
+        String expResult = "Welcome " + Name + " , " + Surname + " it is great to see you again.";
+        String result = instance.returnUserLoginStaus(loginSuccessful, loginUnsuccessful, Name, Surname);
         assertEquals(expResult, result);
         
     }

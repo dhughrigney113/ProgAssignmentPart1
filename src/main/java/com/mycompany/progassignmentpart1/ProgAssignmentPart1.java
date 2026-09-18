@@ -37,5 +37,9 @@ public class ProgAssignmentPart1 {
         String CellphoneNumber = input.next();
         obj.CheckCellphoneNumber(CellphoneNumber);
         
+        String results = obj.RegisterUser(Username, password, CellphoneNumber);
+        System.out.println(results);
+       
+        
     }
 }
