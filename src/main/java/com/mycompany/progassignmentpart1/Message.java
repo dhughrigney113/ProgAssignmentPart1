@@ -64,5 +64,26 @@ public String getMessageHash() { return MessageHash; }
 public String createMessageHash () {
         
     } 
+
+public String printMessages(){
+    if (SentMessage.equals("")){
+        return "No messages have been sent,";
+    }else{
+        return "Message sent";
+    }
 }
+
+public static int getTotalMessages(int totalMessages){
+        
+    return totalMessages;
+}
+
+public static int returnTotalMessages(int totalMessages){
+    return totalMessages;
+}
+
+        
+        
+        
+        }
 
