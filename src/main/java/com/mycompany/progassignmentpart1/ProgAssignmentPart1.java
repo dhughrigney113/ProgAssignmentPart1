@@ -15,7 +15,7 @@ public class ProgAssignmentPart1 {
     public static void main(String[] args) {
       
         Scanner input = new Scanner(System.in);
-         UserLogin obj = new UserLogin();
+         /*UserLogin obj = new UserLogin();
          
          System.out.println("=========REGISTRATION============");
          System.out.println("Hi there ,Please Enter Your Name");
@@ -39,7 +39,22 @@ public class ProgAssignmentPart1 {
         
         String results = obj.RegisterUser(Username, password, CellphoneNumber);
         System.out.println(results);
-       
+       */
         
     }
+     {
+        
+        
+        System.out.println("=========LOGIN============");
+        System.out.println(" Please Enter Your Username");
+        String Username = input.next();
+        
+        
+        System.out.println("Hi Please Enter Your Password");
+        String password = input.next();
+        
+        
+         System.out.println("Hi Please Enter Your Cell Phone Number");
+        String CellphoneNumber = input.next();
+}
 }
