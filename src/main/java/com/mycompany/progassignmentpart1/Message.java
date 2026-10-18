@@ -4,6 +4,8 @@
  */
 package com.mycompany.progassignmentpart1;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -14,14 +16,16 @@ public class Message {
     public String MessageID;
     public String RecipientCell;
     public String MessageHash;
-    public String SentMessage;
+    public String MessageNumber;
     public String MessageText;
-    public String PrintMessage;
     
-    public Message(String MessageID, String RecipientCell, String SentMessage, String MessageText ) {
-        this.MessageID = MessageID;
+   
+    
+    public Message(String recipientCell, String messageText, int messageNumber ) {
+        this.MessageID = generateMessageID();
         this.RecipientCell = RecipientCell;
-        this.SentMessage = SentMessage;
+        this.MessageNumber = MessageNumber;
+        this.MessageHash = createMessageHash();
         this.MessageText = MessageText;
     }
     
@@ -33,7 +37,7 @@ public class Message {
     }
     
     
-    public boolean CheckMessageID (String MessageID){ 
+    public boolean checkMessageID (String MessageID){ 
          if ( MessageID.length()<=10){ 
           return true; 
         }else{ 
@@ -41,24 +45,27 @@ public class Message {
       }   
     } 
      
-    public boolean CheckRecipientCell (String RecipientCell){ 
-      return RecipientCell.startsWith("+27")&& RecipientCell.length()<=10; 
-      } 
+    public String checkRecipientCell() {
+    if (RecipientCell.startsWith("+27") && RecipientCell.length() <= 13) {
+        return "Cell phone number successfully captured.";
+    }
+    return "Cell phone number is incorrectly formatted or does not contain "
+            + "an international code. Please correct the number and try again.";
+}
      
-     public String checkMessageLength(String MessageLength) { 
+     public String checkMessageLength() { 
  
-    if (SentMessage.length() <= 250) { 
+    if (MessageText.length() <= 250) { 
         return "Message ready to send."; 
-    }else{
-       if (SentMessage.length() > 250){
+    }
        return "Please enter a message of less than 250 characters."; 
  
      }
     
-     } 
-     }
+      
      
-    public String createMessageHash(String MessageHash, String MessageNumber ){ 
+     
+    public String createMessageHash(){ 
       String Message = MessageID.substring(0, 2);
         String[] words = MessageText.trim().split("\\s+");
         String firstWord = words[0].replaceAll("[^a-zA-Z]", "").toUpperCase();
@@ -79,20 +86,12 @@ public class Message {
         } 
          
     } 
-     
   
-public String getMessageID() { return MessageID; } 
-public String getRecipientCell() { return RecipientCell; } 
-public String getMessageText() { return MessageText; } 
-public String getMessageHash() { return MessageHash; } 
- 
-
 public String printMessages(){
-    if (SentMessage.equals("")){
-        return "No messages have been sent,";
-    }else{
-        return "Message sent";
-    }
+    return "Message ID: " + MessageID + "\n"
+                + "Message Hash: " + MessageHash + "\n"
+                + "Recipient: " + RecipientCell + "\n"
+                + "Message: " + MessageText;
 }
 
 public static int getTotalMessages(int totalMessages){
@@ -104,7 +103,24 @@ public static int returnTotalMessages(int totalMessagesSent){
     return totalMessagesSent;
 }
 
-       
+       //Stores the message to a JSON file (messages.json) so it can be sent
+     // later. Appends to the file if it already exists.  
+
+public void storeMessage(){
+    String json = "{" 
+            + "\"MessageID\":\"" +MessageID +"\","
+            + "\"RecipientCell\":\"" +RecipientCell +"\","
+            + "\"message\":\"" + MessageText.replace("\"", "\\\"") + "\""
+                    + "}";
+
+          try (FileWriter writer = new FileWriter("messages.json", true)) {
+            writer.write(json + System.lineSeparator());
+        } catch (IOException e) {
+            System.out.println("Error storing message: " + e.getMessage());
+        }
+    }
+ public String getMessageId() { return MessageID; }
+    public String getMessageHash() { return MessageHash; }
 }
 
 
