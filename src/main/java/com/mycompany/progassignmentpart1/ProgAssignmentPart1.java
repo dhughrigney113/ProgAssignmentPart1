@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Student
  */
 public class ProgAssignmentPart1 {
-
+static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
       
         Scanner input = new Scanner(System.in);
@@ -41,29 +41,29 @@ public class ProgAssignmentPart1 {
         System.out.println(results);
        */
         
-    }
+    
     // imitate the login which is used above
-      public static void main(int MessageLength) {
+      
         
         
         System.out.println("=========LOGIN============");
-        System.out.print(" Please Enter Your Username");
+        System.out.print(" Hi Please Enter Your Username");
         String Username = input.nextLine();
         
         
-        System.out.print("Hi Please Enter Your Password");
+        System.out.print(" Please Enter Your Password");
         String password = input.nextLine();
         
         
-         System.out.print("Hi Please Enter Your Cell Phone Number");
+         System.out.print("Please Enter Your Cell Phone Number");
         String CellphoneNumber = input.next();
         
-        if (!Username.equals("kyl")&&!password.equals("kyl_1"))
+        if (!Username.equals("kyl")&&!password.equals("kyl_1")){
              System.out.println("Login failed, Goodbye");
-
+             return;
+        }
      System.out.println("Welcome to QuickChat");
      
-        int Message = 0;
         boolean running = true;
      
      while (running){
@@ -71,16 +71,12 @@ public class ProgAssignmentPart1 {
          System.out.println("Option 2) Still in development,(Coming Soon)");
          System.out.println("Option 3) Quit");
          
-         int option = Integer.parseInt(input.nextLine);
+         int option = Integer.parseInt(input.nextLine());
          if (option == 1){
-             System.out.println("Send Message");
-             int SentMessage = input.nextLine();
-             input.nextLine();
+             System.out.println("how many Messages do you want to send?");
+              int numMessages = Integer.parseInt(input.nextLine());
+              SendMessages(numMessages);
           
-             for(int i = 0; i < MessageLength; i++){
-                 
-             }
-             
          }else if (option == 2) {
         System.out.println("Still in development,Coming Soon");
 
@@ -90,12 +86,34 @@ public class ProgAssignmentPart1 {
              System.out.println("Please choose option 1, 2 or 3");
          }
               }
-
+    }
              // Uses a for loop to capture exactly the number of messages the user set.
-         
+         private static void SendMessages(int numMessages){
+              for(int i = 0; i< numMessages; i++ ){
+                  System.out.println("\n--- Message " + (i + 1) + " of " + numMessages + " ---");
+ 
+            System.out.print("Enter recipient cell number (e.g. +27718693002): ");
+            String RecipientCell = input.nextLine().trim();
+ 
+            System.out.print("Enter your message (max 250 characters): ");
+            String MessageText = input.nextLine().trim();
+ 
+            // loop counter i is the message number used in the hash
+            Message msg = new Message(RecipientCell, MessageText, i);
+ 
+            String cellResult = msg.checkRecipientCell();
+            System.out.println(cellResult);
+            String lengthResult = msg.checkMessageLength();
+            System.out.println(lengthResult);
+ 
+            if (!cellResult.equals("Cell phone number successfully captured.")
+                    || !lengthResult.equals("Message ready to send.")) {
+                continue; // skip invalid message, move to the next one
+            }
+              }
+         }      
          
      
           
          
-}
 }
