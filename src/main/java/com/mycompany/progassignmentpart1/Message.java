@@ -15,14 +15,14 @@ public class Message {
     public String RecipientCell;
     public String MessageHash;
     public String SentMessage;
-    public String MessageLength;
+    public String MessageText;
     public String PrintMessage;
     
-    public Message(String MessageID, String RecipientCell, String SentMessage, String MessageLength ) {
+    public Message(String MessageID, String RecipientCell, String SentMessage, String MessageText ) {
         this.MessageID = MessageID;
         this.RecipientCell = RecipientCell;
         this.SentMessage = SentMessage;
-        this.MessageLength = MessageLength; // used while building the hash
+        this.MessageText = MessageText;
     }
     
     public String generateMessageID (){
@@ -47,18 +47,24 @@ public class Message {
      
      public String checkMessageLength(String MessageLength) { 
  
-    if (SentMessage.length() < 250) { 
+    if (SentMessage.length() <= 250) { 
         return "Message ready to send."; 
     }else{
+       if (SentMessage.length() > 250){
        return "Please enter a message of less than 250 characters."; 
-} 
+ 
      }
     
-    public String createMessageHash(String MessageHash){ 
-        if (MessageID == null && MessageID.contains("-")){ 
-          return "-"; 
-       }   
-         return null; 
+     } 
+     }
+     
+    public String createMessageHash(String MessageHash, String MessageNumber ){ 
+      String Message = MessageID.substring(0, 2);
+        String[] words = MessageText.trim().split("\\s+");
+        String firstWord = words[0].replaceAll("[^a-zA-Z]", "").toUpperCase();
+        String lastWord = words[words.length - 1].replaceAll("[^a-zA-Z]", "").toUpperCase();
+        this.MessageHash = Message + ":" + MessageNumber + ":" + firstWord + lastWord;
+        return this.MessageHash;
     } 
      
     public String SentMessage ( int choice){ 
@@ -93,13 +99,12 @@ public static int getTotalMessages(int totalMessages){
         
     return totalMessages;
 }
-
-public static int returnTotalMessages(int returntotalMessages){
-    return totalMessages;
+// return the total number of messages sent.
+public static int returnTotalMessages(int totalMessagesSent){
+    return totalMessagesSent;
 }
 
-        
-        
-        
-        }
+       
+}
+
 

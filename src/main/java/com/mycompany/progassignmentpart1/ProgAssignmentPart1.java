@@ -43,7 +43,7 @@ public class ProgAssignmentPart1 {
         
     }
     // imitate the login which is used above
-      public static void main() {
+      public static void main(int MessageLength) {
         
         
         System.out.println("=========LOGIN============");
@@ -62,15 +62,24 @@ public class ProgAssignmentPart1 {
              System.out.println("Login failed, Goodbye");
 
      System.out.println("Welcome to QuickChat");
+     
+        int Message = 0;
         boolean running = true;
      
      while (running){
          System.out.println("Option 1) Send Messages");
-         System.out.println("Option 2) Still in development,Coming Soon");
+         System.out.println("Option 2) Still in development,(Coming Soon)");
          System.out.println("Option 3) Quit");
          
          int option = Integer.parseInt(input.nextLine);
          if (option == 1){
+             System.out.println("Send Message");
+             int SentMessage = input.nextLine();
+             input.nextLine();
+          
+             for(int i = 0; i < MessageLength; i++){
+                 
+             }
              
          }else if (option == 2) {
         System.out.println("Still in development,Coming Soon");
@@ -80,12 +89,13 @@ public class ProgAssignmentPart1 {
          }else{
              System.out.println("Please choose option 1, 2 or 3");
          }
-         System.out.println("Message is sent:" +
-                 Message.returnTotalMessages());
-         System.out.println("Thank you for using the app, Goodbye");
-     }
+              }
+
+             // Uses a for loop to capture exactly the number of messages the user set.
+         
+         
+     
           
-     
-     
+         
 }
 }
