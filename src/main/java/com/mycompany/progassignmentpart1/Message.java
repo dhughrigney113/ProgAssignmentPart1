@@ -27,8 +27,11 @@ public class Message {
     
     public String generateMessageID (){
         Random rand = new Random();
-        for (int i = 0; i < 10; i++ )
+        for (int i = 0; i < 10; i++ ){
     }
+        return MessageID;
+    }
+    
     
     public boolean CheckMessageID (String MessageID){ 
          if ( MessageID.length()<=10){ 
@@ -42,6 +45,15 @@ public class Message {
       return RecipientCell.startsWith("+27")&& RecipientCell.length()<=10; 
       } 
      
+     public String checkMessageLength(String MessageLength) { 
+ 
+    if (SentMessage.length() < 250) { 
+        return "Message ready to send."; 
+    }else{
+       return "Please enter a message of less than 250 characters."; 
+} 
+     }
+    
     public String createMessageHash(String MessageHash){ 
         if (MessageID == null && MessageID.contains("-")){ 
           return "-"; 
@@ -62,22 +74,12 @@ public class Message {
          
     } 
      
-   public String checkMessageLength(String MessageLength) { 
- 
-    if (SentMessage.length() < 250) { 
-        return "Message ready to send."; 
-    } 
- 
-    return "Please enter a message of less than 250 characters."; 
-} 
+  
 public String getMessageID() { return MessageID; } 
 public String getRecipientCell() { return RecipientCell; } 
 public String getMessageText() { return MessageText; } 
 public String getMessageHash() { return MessageHash; } 
-
-public String createMessageHash () {
-        
-    } 
+ 
 
 public String printMessages(){
     if (SentMessage.equals("")){
