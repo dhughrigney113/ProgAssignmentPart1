@@ -29,7 +29,7 @@ public class Message {
         this.MessageHash = createMessageHash();
         
     }
-    
+     // Creates a random 10 digit ID
     public String generateMessageID (){
         Random rand = new Random();
          String id = "";
@@ -39,7 +39,8 @@ public class Message {
     return id;
     }
     
-    
+    // Checks that the ID is not longer than 10 characters
+    // Returns true if it is OK and false if it is too long
     public boolean checkMessageID (String MessageID){ 
          if ( MessageID.length()<=10){ 
           return true; 
