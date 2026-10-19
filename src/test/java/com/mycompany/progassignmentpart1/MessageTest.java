@@ -110,7 +110,6 @@ public class MessageTest {
     @Test
     public void testSentMessage() {
         System.out.println("SentMessage");
-        int choice = 0;
         Message instance = new Message ("+27718693002","Hi Mike, can you join us for dinner tonight? ",0);
         assertEquals("Message successfully sent.", instance.SentMessage(1));
         assertEquals("Press 0 to delete the message.", instance.SentMessage(2));
