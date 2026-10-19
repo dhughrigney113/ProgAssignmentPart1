@@ -16,24 +16,27 @@ public class Message {
     public String MessageID;
     public String RecipientCell;
     public String MessageHash;
-    public String MessageNumber;
+    public int MessageNumber;
     public String MessageText;
     
    
     
-    public Message(String recipientCell, String messageText, int messageNumber ) {
-        this.MessageID = generateMessageID();
+    public Message(String RecipientCell, String MessageText, int MessageNumber ) {
         this.RecipientCell = RecipientCell;
         this.MessageNumber = MessageNumber;
-        this.MessageHash = createMessageHash();
         this.MessageText = MessageText;
+        this.MessageID = generateMessageID();
+        this.MessageHash = createMessageHash();
+        
     }
     
     public String generateMessageID (){
         Random rand = new Random();
-        for (int i = 0; i < 10; i++ ){
+         String id = "";
+    for (int i = 0; i < 10; i++) {
+        id = id + rand.nextInt(10);   // adds one random digit each time
     }
-        return MessageID;
+    return id;
     }
     
     
@@ -54,11 +57,12 @@ public class Message {
 }
      
      public String checkMessageLength() { 
- 
-    if (MessageText.length() <= 250) { 
+    int length = MessageText.length();
+       if (length <= 250) 
+     { 
         return "Message ready to send."; 
     }
-       return "Please enter a message of less than 250 characters."; 
+       return "Please enter a message of less than 250 characters." + (length - 250); 
  
      }
     
@@ -93,22 +97,17 @@ public String printMessages(){
                 + "Recipient: " + RecipientCell + "\n"
                 + "Message: " + MessageText;
 }
-
-public static int getTotalMessages(int totalMessages){
-        
-    return totalMessages;
-}
 // return the total number of messages sent.
 public static int returnTotalMessages(int totalMessagesSent){
     return totalMessagesSent;
 }
 
-       //Stores the message to a JSON file (messages.json) so it can be sent
-     // later. Appends to the file if it already exists.  
-
+       //Stores the message to a JSON file (messages.json) so it can be sent later.
+        
 public void storeMessage(){
     String json = "{" 
             + "\"MessageID\":\"" +MessageID +"\","
+            + "\"MessageHash\":\"" + MessageHash + "\","
             + "\"RecipientCell\":\"" +RecipientCell +"\","
             + "\"message\":\"" + MessageText.replace("\"", "\\\"") + "\""
                     + "}";
