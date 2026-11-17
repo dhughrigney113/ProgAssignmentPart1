@@ -12,6 +12,7 @@ import java.util.Random;
  *
  * @author Student
  */
+// part 2 
 public class Message {
     public String MessageID;
     public String RecipientCell;

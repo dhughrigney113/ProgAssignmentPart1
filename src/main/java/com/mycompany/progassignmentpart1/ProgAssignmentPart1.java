@@ -42,7 +42,7 @@ static Scanner input = new Scanner(System.in);
        
         
     
-    // imitate the login which is used above
+    // part2
       
         
         
@@ -141,11 +141,10 @@ static Scanner input = new Scanner(System.in);
             System.out.println("f) Display a report that list the full details of all the stored messages.");
             System.out.println("g) Back to the main menu.");
             System.out.print("Choose an option: ");
-            int choice = Integer.parseInt(input.nextLine());
-
+            String choice = inp.nextLine().trim().toLowerCase();
            
-    
-              }
               
     }
-}
+        
+
+    }
