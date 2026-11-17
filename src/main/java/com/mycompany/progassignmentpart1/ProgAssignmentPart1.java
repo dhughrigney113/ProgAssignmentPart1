@@ -17,7 +17,7 @@ static Scanner input = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
          UserLogin obj = new UserLogin();
          
-         /*System.out.println("=========REGISTRATION============");
+         System.out.println("=========REGISTRATION============");
          System.out.println("Hi there ,Please Enter Your Name");
          String Name = input.nextLine();
          
@@ -39,7 +39,7 @@ static Scanner input = new Scanner(System.in);
         
         String results = obj.RegisterUser(Username, password, CellphoneNumber);
         System.out.println(results);
-       */
+       
         
     
     // imitate the login which is used above
@@ -48,14 +48,14 @@ static Scanner input = new Scanner(System.in);
         
         System.out.println("=========LOGIN============");
         System.out.print(" Hi Please Enter Your Username ");
-        String Username = input.nextLine();
+        Username = input.next();
         
         
         System.out.print(" Please Enter Your Password ");
-        String password = input.nextLine();
+        password = input.next();
         
         
-        if (!Username.equals("kyl")&&!password.equals("kyl_1")){
+        if (!Username.equals("kyl") || !password.equals("kyl_1")){
              System.out.println("Login failed, Goodbye");
              return;
         }
@@ -126,10 +126,26 @@ static Scanner input = new Scanner(System.in);
     }
     System.out.println("\nTotal messages sent: " + Message.returnTotalMessages(totalSent));
 }
+         
+         // ===== PART 3 the fourth main menu ======
+    private static void storedMessagesMenu(Scanner scanner) {
+        boolean inMenu = true;
+
+        while (inMenu) {
+            System.out.println("\n--STORED MESSAGES--");
+            System.out.println("a) Display the sender and recipient of all stored messages.");
+            System.out.println("b) Display the longest stored message.");
+            System.out.println("c) Search for a message ID and display the corresponding recipient and message.");
+            System.out.println("d) Search for all the messages for a particular recipient.");
+            System.out.println("e) Delete a message using the message hash.");
+            System.out.println("f) Display a report that list the full details of all the stored messages.");
+            System.out.println("g) Back to the main menu.");
+            System.out.print("Choose an option: ");
+            int choice = Integer.parseInt(input.nextLine());
+
+           
+    
               }
               
-         
-     
-          
-         
-
+    }
+}
