@@ -122,6 +122,30 @@ public void storeMessage(){
     }
  public String getMessageId() { return MessageID; }
     public String getMessageHash() { return MessageHash; }
+
+
+// PART3 ARRAYS
+
+ public static final int MAX_MESSAGES = 100;
+
+    // Parallel arrays: the same index belongs to the same message
+    private static String[] messageId = new String[MAX_MESSAGES];
+    private static String[] messageHashes = new String[MAX_MESSAGES];
+    private static String[] recipients = new String[MAX_MESSAGES];
+    private static String[] messageTexts = new String[MAX_MESSAGES];
+    private static String[] statuses = new String[MAX_MESSAGES];
+    private static int messageCount = 0;
+
+    // Sent, disregarded and stored messages: texts only
+    private static String[] sentMessages = new String[MAX_MESSAGES];
+    private static int sentCount = 0;
+    private static String[] disregardedMessages = new String[MAX_MESSAGES];
+    private static int disregardedCount = 0;
+    private static String[] storedMessages = new String[MAX_MESSAGES];
+    private static int storedCount = 0;
+
+    private static int totalMessagesSent = 0;
+    private static String sentLog = "";
+    private static String senderName = "Me";
+    private static String jsonFilePath = "messages.json";
 }
-
-
