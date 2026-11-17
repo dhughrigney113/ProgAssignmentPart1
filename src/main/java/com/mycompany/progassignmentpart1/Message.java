@@ -145,7 +145,21 @@ public void storeMessage(){
     private static int storedCount = 0;
 
     private static int totalMessagesSent = 0;
-    private static String sentLog = "";
     private static String senderName = "Me";
     private static String jsonFilePath = "messages.json";
+    
+    // Puts a parcel into the right array, using the counter as the next free index
+        public static void recordMessage(Message msg) {
+    if (messageCount < MAX_MESSAGES) {
+        messageId[messageCount] = msg.getMessageId();
+        messageHashes[messageCount] = msg.getMessageHash();
+        recipients[messageCount] = msg.RecipientCell;
+        messageTexts[messageCount] = msg.MessageText;
+        statuses[messageCount] = "Stored"; 
+        messageCount++;
+        System.out.println("Message successfully recorded in arrays.");
+    } else {
+        System.out.println("Message storage is full.");
+    }
+}
 }
