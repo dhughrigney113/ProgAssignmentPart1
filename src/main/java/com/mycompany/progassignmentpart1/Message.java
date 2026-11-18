@@ -243,10 +243,10 @@ public void storeMessage(){
     private int findIndex(String[] array, String target) {
     for (int i = 0; i < messageCount; i++) {
         if (array[i] != null && array[i].equals(target)) {
-            return i; // Found at index i
+            return i; 
         }
     }
-    return -1; // Not found
+    return -1; 
 }    
     
     // c) Search for a message ID: recipient and message
@@ -271,4 +271,49 @@ public void storeMessage(){
         }
         return result.trim();
     }
+   
+    // e) Delete a message using its message hash
+public String deleteMessage(String hash) {
+
+    // Step 1: Find the index of the message hash
+    int deleteIndex = -1;
+
+    for (int i = 0; i < messageCount; i++) {
+        if (messageHashes[i] != null && messageHashes[i].equals(hash)) {
+            deleteIndex = i;
+            break;
+        }
+    }
+
+    if (deleteIndex == -1) {
+        return "Message hash " + hash + " not found.";
+    }
+
+    String deleted = messageTexts[deleteIndex];
+
+    // Step 2: Shift everything after it one place left
+    // in EVERY parallel array
+    for (int i = deleteIndex; i < messageCount - 1; i++) {
+        messageId[i] = messageId[i + 1];
+        messageHashes[i] = messageHashes[i + 1];
+        recipients[i] = recipients[i + 1];
+        messageTexts[i] = messageTexts[i + 1];
+        statuses[i] = statuses[i + 1];
+    }
+
+    // Step 3: Clear the last slot and lower the counter
+    messageId[messageCount - 1] = null;
+    messageHashes[messageCount - 1] = null;
+    recipients[messageCount - 1] = null;
+    messageTexts[messageCount - 1] = null;
+    statuses[messageCount - 1] = null;
+
+    messageCount--;
+
+    return "Message \"" + deleted + "\" successfully deleted.";
+}
+
+  public String displayReport() {
+      String result = "MESSAGE REPORT\n";
+  }
 }

@@ -43,9 +43,6 @@ static Scanner input = new Scanner(System.in);
         
     
     // part2
-      
-        
-        
         System.out.println("=========LOGIN============");
         System.out.print(" Hi Please Enter Your Username ");
         Username = input.next();
@@ -141,10 +138,33 @@ static Scanner input = new Scanner(System.in);
             System.out.println("f) Display a report that list the full details of all the stored messages.");
             System.out.println("g) Back to the main menu.");
             System.out.print("Choose an option: ");
-            String choice = inp.nextLine().trim().toLowerCase();
+            String choice = input.nextLine().trim().toLowerCase();
            
               
-    }
-        
+             Message store = new Message("", "", 0); 
+              if (choice.equals("a")) {
+                System.out.println(store.displaySenderAndRecipient());
+            } else if (choice.equals("b")) {
+                System.out.println("Longest Message: " + store.displayLongestMessage());
+            } else if (choice.equals("c")) {
+                System.out.print("Enter the message ID: ");
+                System.out.println(store.searchRecAndMes(input.nextLine().trim()));
+            } else if (choice.equals("d")) {
+                System.out.print("Enter the recipient number: ");
+                System.out.println(store.searchRec(input.nextLine().trim()));
+            } else if (choice.equals("e")) {
+                System.out.print("Enter the message hash: ");
+                System.out.println(store.deleteMessage(input.nextLine().trim().toUpperCase()));
+            } else if (choice.equals("f")) {
+                System.out.println(store.displayReport());
+            } else if (choice.equals("g")) {
+                inMenu = false;
+            } else {
+                System.out.println("Invalid option..");
+    
 
+
+        }
     }
+    }
+}
