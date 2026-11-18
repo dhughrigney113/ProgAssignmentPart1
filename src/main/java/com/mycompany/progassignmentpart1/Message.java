@@ -240,7 +240,7 @@ public void storeMessage(){
         return longest;
     }
 
-    private int findIndex(String[] array, String target) {
+     private int findIndex(String[] array, String target) {
     for (int i = 0; i < messageCount; i++) {
         if (array[i] != null && array[i].equals(target)) {
             return i; 
@@ -312,8 +312,24 @@ public String deleteMessage(String hash) {
 
     return "Message \"" + deleted + "\" successfully deleted.";
 }
-
-  public String displayReport() {
-      String result = "MESSAGE REPORT\n";
-  }
+// f) Full report of every dispatched parcel
+  public String displayReport(){
+       if (messageCount == 0) {
+        return "No messages recorded yet.";
+    }
+       String result = "MESSAGE REPORT\n";
+        for (int i = 0; i < messageCount; i++) {
+          if (statuses[i].equals("Stored")) {
+           result = result + "-\n"
+                   + "Message ID: " + messageId[i] + "\n"
+                   + "Message Hash: " + messageHashes[i] + "\n"
+                   + "Recipient: " + recipients[i] + "\n"
+                   + "Message: " + messageTexts[i] + "\n"
+                   + "Status: " + statuses[i] + "\n";
+        }
+    }
+                result = result + "-\nTotal stored messages: " + storedCount;
+                  return result;
 }
+  }
+ 
