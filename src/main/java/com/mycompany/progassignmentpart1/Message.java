@@ -6,6 +6,9 @@ package com.mycompany.progassignmentpart1;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -162,4 +165,28 @@ public void storeMessage(){
         System.out.println("Message storage is full.");
     }
 }
+     // Adds one message to the parallel arrays and to the sent/disregarded/stored array.  
+    private void addEntry(String id, String hash, String recipient, String text, String status) {
+        messageId[messageCount] = id;
+        messageHashes[messageCount] = hash;
+        recipients[messageCount] = recipient;
+        messageTexts[messageCount] = text;
+        statuses[messageCount] = status;
+        messageCount++;
+
+        if (status.equals("Sent")) {
+            sentMessages[sentCount] = text;
+            sentCount++;
+        } else if (status.equals("Stored")) {
+            storedMessages[storedCount] = text;
+            storedCount++;
+        } else {
+            disregardedMessages[disregardedCount] = text;
+            disregardedCount++;
+        }
+    }  
+   
+
+
+    
 }
