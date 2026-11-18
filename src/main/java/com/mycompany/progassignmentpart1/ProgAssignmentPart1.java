@@ -114,10 +114,14 @@ static Scanner input = new Scanner(System.in);
                 System.out.println(msg.SentMessage(choice));
                 
                 if (choice == 1) {
-            totalSent++;         //show send message
-            System.out.println(msg.printMessages());
-            } else if (choice == 2) {  // message disregarded
-        } else if (choice == 3) {    
+             Message.recordMessage(msg, "Sent");
+             totalSent++;
+             System.out.println(msg.printMessages());
+
+            } else if (choice == 2){ 
+             Message.recordMessage(msg, "Disregard");  // message disregarded
+        } else if (choice == 3) {
+            Message.recordMessage(msg, "Stored");
             msg.storeMessage();       // should store the messages
         }
     }
@@ -141,22 +145,25 @@ static Scanner input = new Scanner(System.in);
             String choice = input.nextLine().trim().toLowerCase();
            
               
-             Message store = new Message("", "", 0); 
+             Message messageManager = new Message("", "", 0); 
+             System.out.println(
+             messageManager.loadStoredFromJson("messages.json")
+);
               if (choice.equals("a")) {
-                System.out.println(store.displaySenderAndRecipient());
+                System.out.println(messageManager.displaySenderAndRecipient());
             } else if (choice.equals("b")) {
-                System.out.println("Longest Message: " + store.displayLongestMessage());
+                System.out.println("Longest Message: " + messageManager.displayLongestMessage());
             } else if (choice.equals("c")) {
                 System.out.print("Enter the message ID: ");
-                System.out.println(store.searchRecAndMes(input.nextLine().trim()));
+                System.out.println(messageManager.searchRecAndMes(input.nextLine().trim()));
             } else if (choice.equals("d")) {
                 System.out.print("Enter the recipient number: ");
-                System.out.println(store.searchRec(input.nextLine().trim()));
+                System.out.println(messageManager.searchRec(input.nextLine().trim()));
             } else if (choice.equals("e")) {
                 System.out.print("Enter the message hash: ");
-                System.out.println(store.deleteMessage(input.nextLine().trim().toUpperCase()));
+                System.out.println(messageManager.deleteMessage(input.nextLine().trim().toUpperCase()));
             } else if (choice.equals("f")) {
-                System.out.println(store.displayReport());
+                System.out.println(messageManager.displayReport());
             } else if (choice.equals("g")) {
                 inMenu = false;
             } else {

@@ -15,7 +15,7 @@ import java.util.Random;
  *
  * @author Student
  */
-// part 2====================================================================== 
+//================== part 2====================================================================== 
 public class Message {
     public String MessageID;
     public String RecipientCell;
@@ -153,18 +153,20 @@ public void storeMessage(){
     private static String jsonFilePath = "messages.json";
     
     // Puts a parcel into the right array, using the counter as the next free index
-        public static void recordMessage(Message msg) {
-    if (messageCount < MAX_MESSAGES) {
-        messageId[messageCount] = msg.getMessageId();
-        messageHashes[messageCount] = msg.getMessageHash();
-        recipients[messageCount] = msg.RecipientCell;
-        messageTexts[messageCount] = msg.MessageText;
-        statuses[messageCount] = "Stored"; 
-        messageCount++;
-        System.out.println("Message successfully recorded in arrays.");
-    } else {
+       public static void recordMessage(Message msg, String status) {
+      if (messageCount >= MAX_MESSAGES) {
         System.out.println("Message storage is full.");
+        return;
     }
+
+    if (status.equals("Sent") && sentCount >= MAX_MESSAGES
+            || status.equals("Stored") && storedCount >= MAX_MESSAGES
+            || status.equals("Disregard") && disregardedCount >= MAX_MESSAGES) {
+        System.out.println("Message status array is full.");
+        return;
+    }
+
+    
 }
      // Adds one message to the parallel arrays and to the sent/disregarded/stored array.  
     private void addEntry(String id, String hash, String recipient, String text, String status) {
@@ -176,14 +178,12 @@ public void storeMessage(){
         messageCount++;
 
         if (status.equals("Sent")) {
-            sentMessages[sentCount] = text;
-            sentCount++;
+            sentMessages[sentCount++] = text;
         } else if (status.equals("Stored")) {
-            storedMessages[storedCount] = text;
-            storedCount++;
-        } else {
-            disregardedMessages[disregardedCount] = text;
-            disregardedCount++;
+            storedMessages[storedCount++] = text;
+       } else if (status.equals("Disregard")){
+            disregardedMessages[disregardedCount++] = text;
+          
         }
     }  
    
@@ -328,7 +328,7 @@ public String deleteMessage(String hash) {
                    + "Status: " + statuses[i] + "\n";
         }
     }
-                result = result + "-\nTotal stored messages: " + storedCount;
+                result = result + "-\nTotal stored messages: " + messageCount;
                   return result;
 }
    // ---- Getters ----
