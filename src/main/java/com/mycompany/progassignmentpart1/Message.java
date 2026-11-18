@@ -15,7 +15,7 @@ import java.util.Random;
  *
  * @author Student
  */
-// part 2 
+// part 2====================================================================== 
 public class Message {
     public String MessageID;
     public String RecipientCell;
@@ -127,8 +127,9 @@ public void storeMessage(){
     public String getMessageHash() { return MessageHash; }
 
 
-// PART3 ARRAYS
-
+// PART3 ARRAYS================================================================
+ 
+   
  public static final int MAX_MESSAGES = 100;
 
     // Parallel arrays: the same index belongs to the same message
@@ -239,5 +240,35 @@ public void storeMessage(){
         return longest;
     }
 
+    private int findIndex(String[] array, String target) {
+    for (int i = 0; i < messageCount; i++) {
+        if (array[i] != null && array[i].equals(target)) {
+            return i; // Found at index i
+        }
+    }
+    return -1; // Not found
+}    
     
+    // c) Search for a message ID: recipient and message
+    public String searchRecAndMes(String id) {
+        int index = findIndex(messageId, id);
+        if (index == -1) {
+            return "Message ID " + id + " not found.";
+        }
+        return "Recipient: " + recipients[index] + " | Message: " + messageTexts[index];
+    }
+
+    // d) Every sent or stored message going to one recipient
+    public String searchRec(String recipient) {
+        String result = "";
+        for (int i = 0; i < messageCount; i++) {
+            if (recipients[i].equals(recipient) && !statuses[i].equals("Disregard")) {
+                result = result + messageTexts[i] + "\n";
+            }
+        }
+        if (result.isEmpty()) {
+            return "No messages found for recipient " + recipient + ".";
+        }
+        return result.trim();
+    }
 }
