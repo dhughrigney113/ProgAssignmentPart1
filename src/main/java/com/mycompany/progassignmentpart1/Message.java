@@ -331,5 +331,23 @@ public String deleteMessage(String hash) {
                 result = result + "-\nTotal stored messages: " + storedCount;
                   return result;
 }
+   // ---- Getters ----
+  public int getMessageCount() {return messageCount;
+  }
+  public int getSentCount() { return sentCount;
+  }
+    public int getDisregardedCount() { return disregardedCount; 
+  }
+    public int getStoredCount() { return storedCount;
+  }
+    public String getSentMessage(int index) { return sentMessages[index];
+  }
+    public String getDisregardedMessage(int index) { return disregardedMessages[index]; 
+  }
+    public String getStoredMessage(int index) { return storedMessages[index]; 
+  }
+    public String getMessageHash(int index) { return messageHash[index]; 
+  }
+   
   }
  
