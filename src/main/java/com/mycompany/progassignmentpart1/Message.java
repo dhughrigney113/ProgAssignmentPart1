@@ -214,6 +214,30 @@ public void storeMessage(){
     }
 }
 
+     // a) Sender and recipient of every stored message
+    public String displaySenderAndRecipient() {
+        String result = "";
+        for (int i = 0; i < messageCount; i++) {
+            if (statuses[i].equals("Stored")) {
+                result = result + "Sender: " + senderName + " | Recipient: " + recipients[i] + "\n";
+            }
+        }
+        return result.isEmpty() ? "No stored messages." : result.trim();
+    }
+
+    // b) The longest stored message
+    public String displayLongestMessage() {
+        if (storedCount == 0) {
+            return "No stored messages.";
+        }
+        String longest = storedMessages[0];
+        for (int i = 1; i < storedCount; i++) {
+            if (storedMessages[i].length() > longest.length()) {
+                longest = storedMessages[i];
+            }
+        }
+        return longest;
+    }
 
     
 }
