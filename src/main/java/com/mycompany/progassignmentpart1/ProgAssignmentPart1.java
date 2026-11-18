@@ -21,19 +21,19 @@ static Scanner input = new Scanner(System.in);
          System.out.println("Hi there ,Please Enter Your Name");
          String Name = input.nextLine();
          
-         System.out.println("Hi there ,Please Enter Your Surname");
+         System.out.println("Please Enter Your Surname");
          String Surname = input.nextLine();
          
         
-        System.out.println("Hi Please Enter Your Username");
+        System.out.println("Please Enter Your Username");
         String Username = input.next();
         obj.CheckUsername(Username);
         
-        System.out.println("Hi Please Enter Your Password");
+        System.out.println("Please Enter Your Password");
         String password = input.next();
         obj.CheckPassword(password);
         
-         System.out.println("Hi Please Enter Your Cell Phone Number");
+         System.out.println("Please Enter Your Cell Phone Number");
         String CellphoneNumber = input.next();
         obj.CheckCellphoneNumber(CellphoneNumber);
         
@@ -65,23 +65,23 @@ static Scanner input = new Scanner(System.in);
          System.out.println("Option 1) Send Messages");
          System.out.println("Option 2) Coming Soon");
          System.out.println("Option 3) Quit");
-         
-         int option = Integer.parseInt(input.nextLine());
-         if (option == 1){
-             System.out.println("how many Messages do you want to send?");
-              int numMessages = Integer.parseInt(input.nextLine());
-              SendMessages(numMessages);
-          
-         }else if (option == 2) {
-        System.out.println("Still in development,Coming Soon");
-        System.out.println("---------------------------------------------"); 
-         }else if (option == 3){
-             running =false;
-         }else{
-             System.out.println("Please choose option 1, 2 or 3");
-         }
-              }
+        System.out.print("Choose an option (1-3): ");
+
+    int choice = Integer.parseInt(input.next());
+      if (choice == 1) {
+         System.out.println("How many messages do you want to send?");
+        int numMessages = Integer.parseInt(input.next());
+           SendMessages(numMessages);
+
+    } else if (choice == 2) {
+          System.out.println("Still in development, Coming Soon");
+    } else if (choice == 3) {
+          running = false;
+    } else {
+       System.out.println("Please choose option 1, 2 or 3");
+
     }
+}}
              // Uses a for loop to capture exactly the number of messages the user set.
          private static void SendMessages(int numMessages){
              int totalSent = 0;

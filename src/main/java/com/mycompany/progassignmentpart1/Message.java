@@ -346,8 +346,9 @@ public String deleteMessage(String hash) {
   }
     public String getStoredMessage(int index) { return storedMessages[index]; 
   }
-    public String getMessageHash(int index) { return messageHash[index]; 
+    public String getMessageHash(int index) { return messageHashes[index]; 
   }
-   
+   public String getMessageId(int index) { return messageId[index]; 
+   }
   }
  
