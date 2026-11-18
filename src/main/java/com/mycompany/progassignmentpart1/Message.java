@@ -186,6 +186,33 @@ public void storeMessage(){
         }
     }  
    
+// Reads the stored messages from the JSON file INTO the stored array
+    public String loadStoredFromJson(String fileName) {
+        int loaded = 0;
+    try {
+        List<String> lines = Files.readAllLines(Paths.get(fileName));
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i).trim();
+            if (!line.equals("") && storedCount < MAX_MESSAGES) {
+                // Extract the "message" value from the JSON line
+                String marker = "\"message\":\"";
+                int start = line.indexOf(marker);
+                if (start != -1) {
+                    start += marker.length();
+                    int end = line.lastIndexOf("\"");
+                    String msgText = line.substring(start, end).replace("\\\"", "\"");
+
+                    storedMessages[storedCount] = msgText;
+                    storedCount++;
+                    loaded++;
+                }
+            }
+        }
+        return loaded + " stored message(s) loaded from " + fileName;
+    } catch (IOException e) {
+        return "No stored messages on file yet.";
+    }
+}
 
 
     
