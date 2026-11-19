@@ -402,11 +402,14 @@ public class MessageTest {
      */
     @Test
     public void testDisplayReport() {
-        System.out.println("displayReport");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.displayReport();
-        assertEquals(expResult, result);
+       System.out.println("displayReport");
+        Message msg1 = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(msg1, "Sent");
+
+        String result = Message.displayReport();
+        assertNotNull(result);
+        assertTrue(result.contains("MESSAGE REPORT"));
+        assertTrue(result.contains(MSG_1));
        }
 
     /**
@@ -415,10 +418,9 @@ public class MessageTest {
     @Test
     public void testGetMessageCount() {
         System.out.println("getMessageCount");
-        Message instance = null;
-        int expResult = 0;
-        int result = instance.getMessageCount();
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(instance, "Sent");
+        assertTrue(instance.getMessageCount() > 0);
        }
 
     /**
@@ -427,10 +429,10 @@ public class MessageTest {
     @Test
     public void testGetSentCount() {
         System.out.println("getSentCount");
-        Message instance = null;
-        int expResult = 0;
+        Message instance = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(instance, "Sent");
         int result = instance.getSentCount();
-        assertEquals(expResult, result);
+        assertTrue(instance.getSentCount() > 0);
         }
 
     /**
@@ -439,11 +441,10 @@ public class MessageTest {
     @Test
     public void testGetDisregardedCount() {
         System.out.println("getDisregardedCount");
-        Message instance = null;
-        int expResult = 0;
+        Message instance = new Message(REC_3, MSG_3, 2);
+        Message.recordMessage(instance, "Disregard");
         int result = instance.getDisregardedCount();
-        assertEquals(expResult, result);
-       }
+        assertTrue(instance.getDisregardedCount() > 0);       }
 
     /**
      * Test of getStoredCount method, of class Message.
@@ -451,10 +452,9 @@ public class MessageTest {
     @Test
     public void testGetStoredCount() {
         System.out.println("getStoredCount");
-        Message instance = null;
-        int expResult = 0;
-        int result = instance.getStoredCount();
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(instance, "Stored");
+        assertTrue(instance.getStoredCount() > 0);
        }
 
     /**
@@ -463,12 +463,9 @@ public class MessageTest {
     @Test
     public void testGetSentMessage() {
         System.out.println("getSentMessage");
-        int index = 0;
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getSentMessage(index);
-        assertEquals(expResult, result);
-      }
+        Message instance = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(instance, "Sent");
+        assertNotNull(instance.getSentMessage(0));      }
 
     /**
      * Test of getDisregardedMessage method, of class Message.
@@ -476,11 +473,9 @@ public class MessageTest {
     @Test
     public void testGetDisregardedMessage() {
         System.out.println("getDisregardedMessage");
-        int index = 0;
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getDisregardedMessage(index);
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_3, MSG_3, 2);
+        Message.recordMessage(instance, "Disregard");
+        assertNotNull(instance.getDisregardedMessage(0));
       }
 
     /**
