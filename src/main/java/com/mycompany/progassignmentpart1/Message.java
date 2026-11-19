@@ -4,11 +4,12 @@
  */
 package com.mycompany.progassignmentpart1;
 
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -72,10 +73,7 @@ public class Message {
  
      }
     
-      
-     
-     
-    public String createMessageHash(){ 
+      public String createMessageHash(){ 
       String Message = MessageID.substring(0, 2);
         String[] words = MessageText.trim().split("\\s+");
         String firstWord = words[0].replaceAll("[^a-zA-Z]", "").toUpperCase();
@@ -148,7 +146,7 @@ public void storeMessage(){
     public String getMessageHash() { return MessageHash; }
 
 
-// PART3 ARRAYS================================================================
+// =====================PART3 ARRAYS================================================================
  
    
  public static final int MAX_MESSAGES = 100;
@@ -190,7 +188,7 @@ public void storeMessage(){
 
     
 }
-     // Adds one message to the parallel arrays and to the sent/disregarded/stored array.  
+     // Adds one message to the arrays and to the sent/disregarded/stored array.  
     private static void addEntry(String id, String hash, String recipient, String text, String status) {
         messageId[messageCount] = id;
         messageHashes[messageCount] = hash;

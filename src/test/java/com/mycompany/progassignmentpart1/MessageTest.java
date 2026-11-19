@@ -181,7 +181,7 @@ public class MessageTest {
         assertTrue(result.endsWith(":0:HITONIGHT"));
        
     }
-
+ 
     /**
      * =========PART 3===========
      */

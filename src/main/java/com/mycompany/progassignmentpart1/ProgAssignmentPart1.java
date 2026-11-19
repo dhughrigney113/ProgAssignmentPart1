@@ -87,7 +87,7 @@ static int totalSent = 0;
     } else if (choice == 4) {
         storedMessagesMenu();
     } else {
-       System.out.println("Please choose option 1, 2 or 3");
+       System.out.println("Please choose option 1, 2, 3 or 4");
 
     }
 }
@@ -138,7 +138,11 @@ static int totalSent = 0;
     System.out.println("\nTotal messages sent: " + Message.returnTotalMessages(totalSent));
 }
          
-         // ===== PART 3 the fourth main menu ======
+         
+
+// ===== PART 3 the fourth main menu ======
+         
+         
     private static void storedMessagesMenu() {
         boolean inMenu = true;
 

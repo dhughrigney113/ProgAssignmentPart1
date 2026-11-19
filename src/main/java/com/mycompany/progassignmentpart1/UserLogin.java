@@ -47,7 +47,7 @@ public class UserLogin {
     }
     
     public boolean CheckCellphoneNumber (String CellphoneNumber){
-      return CellphoneNumber.startsWith("+27")&& CellphoneNumber.length()<=10;
+      return CellphoneNumber.startsWith("+27")&& CellphoneNumber.length()<=13;
     }
     
     public String RegisterUser(String Username, String Password, String CellphoneNumber){
