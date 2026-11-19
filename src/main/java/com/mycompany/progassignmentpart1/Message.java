@@ -152,7 +152,7 @@ public void storeMessage(){
     private static String senderName = "Me";
     private static String jsonFilePath = "messages.json";
     
-    // Puts a parcel into the right array, using the counter as the next free index
+// Called from main after SentMessage(choice): "Sent", "Stored" or "Disregard"
        public static void recordMessage(Message msg, String status) {
       if (messageCount >= MAX_MESSAGES) {
         System.out.println("Message storage is full.");
@@ -165,11 +165,12 @@ public void storeMessage(){
         System.out.println("Message status array is full.");
         return;
     }
+    addEntry(msg.MessageID, msg.MessageHash, msg.RecipientCell, msg.MessageText, status);
 
     
 }
      // Adds one message to the parallel arrays and to the sent/disregarded/stored array.  
-    private void addEntry(String id, String hash, String recipient, String text, String status) {
+    private static void addEntry(String id, String hash, String recipient, String text, String status) {
         messageId[messageCount] = id;
         messageHashes[messageCount] = hash;
         recipients[messageCount] = recipient;
@@ -188,7 +189,7 @@ public void storeMessage(){
     }  
    
 // Reads the stored messages from the JSON file INTO the stored array
-    public String loadStoredFromJson(String fileName) {
+    public static String loadStoredFromJson(String fileName) {
         int loaded = 0;
     try {
         List<String> lines = Files.readAllLines(Paths.get(fileName));
@@ -206,6 +207,7 @@ public void storeMessage(){
                     storedMessages[storedCount] = msgText;
                     storedCount++;
                     loaded++;
+            
                 }
             }
         }
@@ -216,7 +218,7 @@ public void storeMessage(){
 }
 
      // a) Sender and recipient of every stored message
-    public String displaySenderAndRecipient() {
+    public static String displaySenderAndRecipient() {
         String result = "";
         for (int i = 0; i < messageCount; i++) {
             if (statuses[i].equals("Stored")) {
@@ -227,7 +229,7 @@ public void storeMessage(){
     }
 
     // b) The longest stored message
-    public String displayLongestMessage() {
+    public static String displayLongestMessage() {
         if (storedCount == 0) {
             return "No stored messages.";
         }
@@ -240,7 +242,7 @@ public void storeMessage(){
         return longest;
     }
 
-     private int findIndex(String[] array, String target) {
+     private static int findIndex(String[] array, String target) {
     for (int i = 0; i < messageCount; i++) {
         if (array[i] != null && array[i].equals(target)) {
             return i; 
@@ -250,7 +252,7 @@ public void storeMessage(){
 }    
     
     // c) Search for a message ID: recipient and message
-    public String searchRecAndMes(String id) {
+    public static String searchRecAndMes(String id) {
         int index = findIndex(messageId, id);
         if (index == -1) {
             return "Message ID " + id + " not found.";
@@ -259,7 +261,7 @@ public void storeMessage(){
     }
 
     // d) Every sent or stored message going to one recipient
-    public String searchRec(String recipient) {
+    public static String searchRec(String recipient) {
         String result = "";
         for (int i = 0; i < messageCount; i++) {
             if (recipients[i].equals(recipient) && !statuses[i].equals("Disregard")) {
@@ -273,8 +275,8 @@ public void storeMessage(){
     }
    
     // e) Delete a message using its message hash
-public String deleteMessage(String hash) {
-
+public static String deleteMessage(String hash) {
+    
     // Step 1: Find the index of the message hash
     int deleteIndex = -1;
 
@@ -299,7 +301,7 @@ public String deleteMessage(String hash) {
         recipients[i] = recipients[i + 1];
         messageTexts[i] = messageTexts[i + 1];
         statuses[i] = statuses[i + 1];
-    }
+      }
 
     // Step 3: Clear the last slot and lower the counter
     messageId[messageCount - 1] = null;
@@ -313,13 +315,13 @@ public String deleteMessage(String hash) {
     return "Message \"" + deleted + "\" successfully deleted.";
 }
 // f) Full report of every dispatched parcel
-  public String displayReport(){
+  public static String displayReport(){
        if (messageCount == 0) {
         return "No messages recorded yet.";
     }
        String result = "MESSAGE REPORT\n";
         for (int i = 0; i < messageCount; i++) {
-          if (statuses[i].equals("Stored")) {
+          if (!statuses[i].equals("Disregard")) {
            result = result + "-\n"
                    + "Message ID: " + messageId[i] + "\n"
                    + "Message Hash: " + messageHashes[i] + "\n"

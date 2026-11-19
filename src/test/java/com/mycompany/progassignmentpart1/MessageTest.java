@@ -16,9 +16,8 @@ public class MessageTest {
     
     public MessageTest() {
     }
-    
-   
-    /**
+
+ /**
      * Test of generateMessageID method, of class Message.
      */
     @Test
@@ -182,5 +181,298 @@ public class MessageTest {
         assertTrue(result.endsWith(":0:HITONIGHT"));
        
     }
+
+    /**
+     * =========PART 3===========
+     */
+    
+    /**
+     * Test of generateMessageID method, of class Message.
+     */
+    @Test
+    public void testGenerateMessageID() {
+        System.out.println("generateMessageID");
+        Message instance = new Message("+27718693002", "Test message", 0);
+        String expResult = "";
+        String result = instance.generateMessageID();
+        assertEquals(10, result.length());
+       
+    }
+
+    /**
+     * Test of checkMessageID method, of class Message.
+     */
+    @Test
+    public void testCheckMessageID() {
+        System.out.println("checkMessageID");
+        String MessageID = "";
+        Message instance = new Message("+27718693002", "Test message", 0);
+        String validId = "1234567890";
+        boolean result = instance.checkMessageID(MessageID);
+        assertTrue(instance.checkMessageID(validId));
+        
+        String invalidId = "12345678901"; 
+        assertFalse(instance.checkMessageID(invalidId));
+    }
+
+    /**
+     * Test of checkRecipientCell method, of class Message.
+     */
+    @Test
+    public void testCheckRecipientCell() {
+        System.out.println("checkRecipientCell");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.checkRecipientCell();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of checkMessageLength method, of class Message.
+     */
+    @Test
+    public void testCheckMessageLength() {
+        System.out.println("checkMessageLength");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.checkMessageLength();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getMessageId method, of class Message.
+     */
+    @Test
+    public void testGetMessageId_0args() {
+        System.out.println("getMessageId");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getMessageId();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getMessageHash method, of class Message.
+     */
+    @Test
+    public void testGetMessageHash_0args() {
+        System.out.println("getMessageHash");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getMessageHash();
+        assertEquals(expResult, result);
+      }
+
+    /**
+     * Test of recordMessage method, of class Message.
+     */
+    @Test
+    public void testRecordMessage() {
+        System.out.println("recordMessage");
+        Message msg = null;
+        String status = "";
+        Message.recordMessage(msg, status);
+      }
+
+    /**
+     * Test of loadStoredFromJson method, of class Message.
+     */
+    @Test
+    public void testLoadStoredFromJson() {
+        System.out.println("loadStoredFromJson");
+        String fileName = "";
+        Message instance = null;
+        String expResult = "";
+        String result = instance.loadStoredFromJson(fileName);
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of displaySenderAndRecipient method, of class Message.
+     */
+    @Test
+    public void testDisplaySenderAndRecipient() {
+        System.out.println("displaySenderAndRecipient");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.displaySenderAndRecipient();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of displayLongestMessage method, of class Message.
+     */
+    @Test
+    public void testDisplayLongestMessage() {
+        System.out.println("displayLongestMessage");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.displayLongestMessage();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of searchRecAndMes method, of class Message.
+     */
+    @Test
+    public void testSearchRecAndMes() {
+        System.out.println("searchRecAndMes");
+        String id = "";
+        Message instance = null;
+        String expResult = "";
+        String result = instance.searchRecAndMes(id);
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of searchRec method, of class Message.
+     */
+    @Test
+    public void testSearchRec() {
+        System.out.println("searchRec");
+        String recipient = "";
+        Message instance = null;
+        String expResult = "";
+        String result = instance.searchRec(recipient);
+        assertEquals(expResult, result);
+        }
+
+    /**
+     * Test of deleteMessage method, of class Message.
+     */
+    @Test
+    public void testDeleteMessage() {
+        System.out.println("deleteMessage");
+        String hash = "";
+        Message instance = null;
+        String expResult = "";
+        String result = instance.deleteMessage(hash);
+        assertEquals(expResult, result);
+        }
+
+    /**
+     * Test of displayReport method, of class Message.
+     */
+    @Test
+    public void testDisplayReport() {
+        System.out.println("displayReport");
+        Message instance = null;
+        String expResult = "";
+        String result = instance.displayReport();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getMessageCount method, of class Message.
+     */
+    @Test
+    public void testGetMessageCount() {
+        System.out.println("getMessageCount");
+        Message instance = null;
+        int expResult = 0;
+        int result = instance.getMessageCount();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getSentCount method, of class Message.
+     */
+    @Test
+    public void testGetSentCount() {
+        System.out.println("getSentCount");
+        Message instance = null;
+        int expResult = 0;
+        int result = instance.getSentCount();
+        assertEquals(expResult, result);
+        }
+
+    /**
+     * Test of getDisregardedCount method, of class Message.
+     */
+    @Test
+    public void testGetDisregardedCount() {
+        System.out.println("getDisregardedCount");
+        Message instance = null;
+        int expResult = 0;
+        int result = instance.getDisregardedCount();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getStoredCount method, of class Message.
+     */
+    @Test
+    public void testGetStoredCount() {
+        System.out.println("getStoredCount");
+        Message instance = null;
+        int expResult = 0;
+        int result = instance.getStoredCount();
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getSentMessage method, of class Message.
+     */
+    @Test
+    public void testGetSentMessage() {
+        System.out.println("getSentMessage");
+        int index = 0;
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getSentMessage(index);
+        assertEquals(expResult, result);
+      }
+
+    /**
+     * Test of getDisregardedMessage method, of class Message.
+     */
+    @Test
+    public void testGetDisregardedMessage() {
+        System.out.println("getDisregardedMessage");
+        int index = 0;
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getDisregardedMessage(index);
+        assertEquals(expResult, result);
+      }
+
+    /**
+     * Test of getStoredMessage method, of class Message.
+     */
+    @Test
+    public void testGetStoredMessage() {
+        System.out.println("getStoredMessage");
+        int index = 0;
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getStoredMessage(index);
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getMessageHash method, of class Message.
+     */
+    @Test
+    public void testGetMessageHash_int() {
+        System.out.println("getMessageHash");
+        int index = 0;
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getMessageHash(index);
+        assertEquals(expResult, result);
+       }
+
+    /**
+     * Test of getMessageId method, of class Message.
+     */
+    @Test
+    public void testGetMessageId_int() {
+        System.out.println("getMessageId");
+        int index = 0;
+        Message instance = null;
+        String expResult = "";
+        String result = instance.getMessageId(index);
+        assertEquals(expResult, result);
+       }
     
 }

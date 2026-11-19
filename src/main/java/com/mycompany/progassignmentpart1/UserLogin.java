@@ -25,16 +25,22 @@ public class UserLogin {
     }
     
     public boolean CheckPassword (String Password){
-      //if (Password.contains("A-Z" + "0-9" + "^a-zA-z0-9") && Password.length()==8){
-          //return true;
-       // }else{
-         // return false;
-     // } 
      
-       boolean hasLength = Password.length() >=8;
+        boolean hasLength = Password.length() >=8;
        boolean hasCapital =Password.contains("A-Z");
        boolean hasNumber = Password.contains("0-9");
-       boolean hasSpecial = Password.contains("^a-zA-z0-9");
+       boolean hasSpecial = Password.contains("^a-zA-z0-9@");
+       
+       for (int i = 0; i < Password.length(); i++) {
+        char c = Password.charAt(i);
+        if (Character.isUpperCase(c)) {
+            hasCapital = true;
+        } else if (Character.isDigit(c)) {
+            hasNumber = true;
+        } else if (!Character.isLetter(c)) {
+            hasSpecial = true;      
+        }
+    }
        return hasLength && hasCapital && hasNumber && hasSpecial;
      
      
@@ -45,6 +51,7 @@ public class UserLogin {
     }
     
     public String RegisterUser(String Username, String Password, String CellphoneNumber){
+        
         if (!CheckUsername(Username)){
             return "Username is not correctly formatted; Please ensure that your username contains an underscore and is not more than five characters in length";
         }else if (!CheckPassword(Password)){
@@ -52,7 +59,7 @@ public class UserLogin {
         }else if (!CheckCellphoneNumber(CellphoneNumber)){
             return "Cell Phone Number is not correctly formatted; or does not contain international code";
         }else{
-            return "Login Successfull, Welcome<user first name>, <user last name> it is great to see you again";
+            return "registered successfully" ;
         
         }
     }

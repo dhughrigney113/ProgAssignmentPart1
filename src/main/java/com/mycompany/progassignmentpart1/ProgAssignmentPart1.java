@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class ProgAssignmentPart1 {
 static Scanner input = new Scanner(System.in);
+static int totalSent = 0; 
     public static void main(String[] args) {
       
         Scanner input = new Scanner(System.in);
@@ -26,33 +27,36 @@ static Scanner input = new Scanner(System.in);
          
         
         System.out.println("Please Enter Your Username");
-        String Username = input.next();
-        obj.CheckUsername(Username);
-        
-        System.out.println("Please Enter Your Password");
-        String password = input.next();
-        obj.CheckPassword(password);
-        
-         System.out.println("Please Enter Your Cell Phone Number");
-        String CellphoneNumber = input.next();
-        obj.CheckCellphoneNumber(CellphoneNumber);
-        
-        String results = obj.RegisterUser(Username, password, CellphoneNumber);
-        System.out.println(results);
+        String Username = input.next().trim();
        
         
+        System.out.println("Please Enter Your Password");
+        String password = input.next().trim();
+       
+        
+         System.out.println("Please Enter Your Cell Phone Number");
+        String CellphoneNumber = input.next().trim();
+      
+        String results = obj.RegisterUser(Username, password, CellphoneNumber);
+        System.out.println(results);
+       boolean usernameOk = obj.CheckUsername(Username);
+       boolean passwordOk = obj.CheckPassword(password);
+       boolean cellOk = obj.CheckCellphoneNumber(CellphoneNumber);
+       System.out.println(obj.RegisterUser(Username, password, CellphoneNumber));
+          if (!(usernameOk && passwordOk && cellOk)) {
+    return;// registration failed, no login
+}
+        
     
-    // part2
+    // part2======================================
         System.out.println("=========LOGIN============");
         System.out.print(" Hi Please Enter Your Username ");
-        Username = input.next();
-        
-        
+        Username = input.next().trim();
         System.out.print(" Please Enter Your Password ");
-        password = input.next();
+        password = input.next().trim();
         
         
-        if (!Username.equals("kyl") || !password.equals("kyl_1")){
+        if (!Username.equals(Username) || !password.equals(password)){
              System.out.println("Login failed, Goodbye");
              return;
         }
@@ -62,12 +66,15 @@ static Scanner input = new Scanner(System.in);
         boolean running = true;
      
      while (running){
-         System.out.println("Option 1) Send Messages");
-         System.out.println("Option 2) Coming Soon");
-         System.out.println("Option 3) Quit");
-        System.out.print("Choose an option (1-3): ");
+        System.out.println("Option 1) Send Messages");
+        System.out.println("Option 2) Coming Soon");
+        System.out.println("Option 3) Quit");
+        System.out.println("Option 4) Stored Messages");
+        System.out.println("---------------------------------------------");
+        System.out.print("Choose an option (1-4): ");
 
     int choice = Integer.parseInt(input.next());
+    
       if (choice == 1) {
          System.out.println("How many messages do you want to send?");
         int numMessages = Integer.parseInt(input.next());
@@ -77,11 +84,14 @@ static Scanner input = new Scanner(System.in);
           System.out.println("Still in development, Coming Soon");
     } else if (choice == 3) {
           running = false;
+    } else if (choice == 4) {
+        storedMessagesMenu();
     } else {
        System.out.println("Please choose option 1, 2 or 3");
 
     }
-}}
+}
+    }
              // Uses a for loop to capture exactly the number of messages the user set.
          private static void SendMessages(int numMessages){
              int totalSent = 0;
@@ -129,7 +139,7 @@ static Scanner input = new Scanner(System.in);
 }
          
          // ===== PART 3 the fourth main menu ======
-    private static void storedMessagesMenu(Scanner scanner) {
+    private static void storedMessagesMenu() {
         boolean inMenu = true;
 
         while (inMenu) {
@@ -142,28 +152,24 @@ static Scanner input = new Scanner(System.in);
             System.out.println("f) Display a report that list the full details of all the stored messages.");
             System.out.println("g) Back to the main menu.");
             System.out.print("Choose an option: ");
+            
             String choice = input.nextLine().trim().toLowerCase();
            
-              
-             Message messageManager = new Message("", "", 0); 
-             System.out.println(
-             messageManager.loadStoredFromJson("messages.json")
-);
               if (choice.equals("a")) {
-                System.out.println(messageManager.displaySenderAndRecipient());
+                System.out.println(Message.displaySenderAndRecipient());
             } else if (choice.equals("b")) {
-                System.out.println("Longest Message: " + messageManager.displayLongestMessage());
+                System.out.println("Longest Message: " + Message.displayLongestMessage());
             } else if (choice.equals("c")) {
                 System.out.print("Enter the message ID: ");
-                System.out.println(messageManager.searchRecAndMes(input.nextLine().trim()));
+                System.out.println(Message.searchRecAndMes(input.nextLine().trim()));
             } else if (choice.equals("d")) {
                 System.out.print("Enter the recipient number: ");
-                System.out.println(messageManager.searchRec(input.nextLine().trim()));
+                System.out.println(Message.searchRec(input.nextLine().trim()));
             } else if (choice.equals("e")) {
                 System.out.print("Enter the message hash: ");
-                System.out.println(messageManager.deleteMessage(input.nextLine().trim().toUpperCase()));
+                System.out.println(Message.deleteMessage(input.nextLine().trim().toUpperCase()));
             } else if (choice.equals("f")) {
-                System.out.println(messageManager.displayReport());
+                System.out.println(Message.displayReport());
             } else if (choice.equals("g")) {
                 inMenu = false;
             } else {
