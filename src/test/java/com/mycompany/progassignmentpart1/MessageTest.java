@@ -186,6 +186,23 @@ public class MessageTest {
      * =========PART 3===========
      */
     
+    
+    // Test data constants from assignment specification
+    private static final String REC_1 = "+27834557896";
+    private static final String MSG_1 = "Did you get the cake?";
+
+    private static final String REC_2 = "+27838884567";
+    private static final String MSG_2 = "Where are you? You are late! I have asked you to be on time.";
+
+    private static final String REC_3 = "+27834484567";
+    private static final String MSG_3 = "Yohoooo, I am at your gate.";
+
+    private static final String REC_4 = "0838884567";
+    private static final String MSG_4 = "It is dinner time !";
+
+    private static final String REC_5 = "+27838884567";
+    private static final String MSG_5 = "Ok, I am leaving without you.";
+    
     /**
      * Test of generateMessageID method, of class Message.
      */
@@ -221,11 +238,12 @@ public class MessageTest {
     @Test
     public void testCheckRecipientCell() {
         System.out.println("checkRecipientCell");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.checkRecipientCell();
-        assertEquals(expResult, result);
-       }
+        Message validInstance = new Message(REC_1, MSG_1, 0);
+        String result = validInstance.checkRecipientCell();
+        assertEquals("Cell phone number successfully captured.", validInstance.checkRecipientCell());
+       Message invalidInstance = new Message(REC_4, MSG_4, 3);
+       assertTrue(invalidInstance.checkRecipientCell().contains("incorrectly formatted"));
+    }
 
     /**
      * Test of checkMessageLength method, of class Message.
@@ -233,10 +251,9 @@ public class MessageTest {
     @Test
     public void testCheckMessageLength() {
         System.out.println("checkMessageLength");
-        Message instance = null;
-        String expResult = "";
+        Message instance = new Message(REC_1, MSG_1, 0);
         String result = instance.checkMessageLength();
-        assertEquals(expResult, result);
+        assertEquals("Message ready to send.", instance.checkMessageLength());
        }
 
     /**
@@ -245,10 +262,9 @@ public class MessageTest {
     @Test
     public void testGetMessageId_0args() {
         System.out.println("getMessageId");
-        Message instance = null;
-        String expResult = "";
+        Message instance = new Message(REC_1, MSG_1, 0);;
         String result = instance.getMessageId();
-        assertEquals(expResult, result);
+        assertEquals(10, instance.getMessageId().length());
        }
 
     /**
@@ -257,10 +273,10 @@ public class MessageTest {
     @Test
     public void testGetMessageHash_0args() {
         System.out.println("getMessageHash");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getMessageHash();
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_1, MSG_1, 0);
+        String hash = instance.getMessageHash();
+        assertNotNull(hash);
+        assertTrue(hash.endsWith(":0:DIDCAKE"));
       }
 
     /**
@@ -269,9 +285,23 @@ public class MessageTest {
     @Test
     public void testRecordMessage() {
         System.out.println("recordMessage");
-        Message msg = null;
-        String status = "";
-        Message.recordMessage(msg, status);
+        Message msg1 = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(msg1, "Sent");
+
+        Message msg2 = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(msg2, "Stored");
+
+        Message msg3 = new Message(REC_3, MSG_3, 2);
+        Message.recordMessage(msg3, "Disregard");
+
+        Message msg4 = new Message(REC_4, MSG_4, 3);
+        Message.recordMessage(msg4, "Sent");
+
+        Message msg5 = new Message(REC_5, MSG_5, 4);
+        Message.recordMessage(msg5, "Stored");
+
+        assertTrue(msg1.getMessageCount() >= 5);
+        assertEquals(MSG_1, msg1.getSentMessage(0));
       }
 
     /**
@@ -280,11 +310,9 @@ public class MessageTest {
     @Test
     public void testLoadStoredFromJson() {
         System.out.println("loadStoredFromJson");
-        String fileName = "";
-        Message instance = null;
-        String expResult = "";
-        String result = instance.loadStoredFromJson(fileName);
-        assertEquals(expResult, result);
+        String fileName = "messages.json";
+        String result = Message.loadStoredFromJson(fileName);
+       assertNotNull(result);
        }
 
     /**
@@ -292,11 +320,13 @@ public class MessageTest {
      */
     @Test
     public void testDisplaySenderAndRecipient() {
-        System.out.println("displaySenderAndRecipient");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.displaySenderAndRecipient();
-        assertEquals(expResult, result);
+       System.out.println("displaySenderAndRecipient");
+        Message msg2 = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(msg2, "Stored");
+
+        String result = Message.displaySenderAndRecipient();
+        assertNotNull(result);
+        assertTrue(result.contains(REC_2));
        }
 
     /**
@@ -305,10 +335,20 @@ public class MessageTest {
     @Test
     public void testDisplayLongestMessage() {
         System.out.println("displayLongestMessage");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.displayLongestMessage();
-        assertEquals(expResult, result);
+        Message msg1 = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(msg1, "Sent");
+
+        Message msg2 = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(msg2, "Stored");
+
+        Message msg3 = new Message(REC_3, MSG_3, 2);
+        Message.recordMessage(msg3, "Disregard");
+
+        Message msg4 = new Message(REC_4, MSG_4, 3);
+        Message.recordMessage(msg4, "Sent");
+
+        String result = Message.displayLongestMessage();
+        assertEquals(MSG_2, result);
     }
 
     /**
@@ -317,10 +357,12 @@ public class MessageTest {
     @Test
     public void testSearchRecAndMes() {
         System.out.println("searchRecAndMes");
-        String id = "";
-        Message instance = null;
-        String expResult = "";
-        String result = instance.searchRecAndMes(id);
+        Message msg4 = new Message(REC_4, MSG_4, 3);
+        Message.recordMessage(msg4, "Sent");
+
+        String id = msg4.getMessageId();
+        String expResult = "Recipient: " + REC_4 + " | Message: " + MSG_4;
+        String result = Message.searchRecAndMes(id);
         assertEquals(expResult, result);
        }
 
@@ -330,12 +372,15 @@ public class MessageTest {
     @Test
     public void testSearchRec() {
         System.out.println("searchRec");
-        String recipient = "";
-        Message instance = null;
-        String expResult = "";
-        String result = instance.searchRec(recipient);
-        assertEquals(expResult, result);
-        }
+       Message msg2 = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(msg2, "Stored");
+
+        Message msg5 = new Message(REC_5, MSG_5, 4);
+        Message.recordMessage(msg5, "Stored");
+
+        String result = Message.searchRec(REC_2);
+        assertTrue(result.contains(MSG_2));
+        assertTrue(result.contains(MSG_5));}
 
     /**
      * Test of deleteMessage method, of class Message.
@@ -343,10 +388,12 @@ public class MessageTest {
     @Test
     public void testDeleteMessage() {
         System.out.println("deleteMessage");
-        String hash = "";
-        Message instance = null;
-        String expResult = "";
-        String result = instance.deleteMessage(hash);
+        Message msg2 = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(msg2, "Stored");
+
+        String hash = msg2.getMessageHash();
+        String expResult = "Message \"" + MSG_2 + "\" successfully deleted.";
+        String result = Message.deleteMessage(hash);
         assertEquals(expResult, result);
         }
 
