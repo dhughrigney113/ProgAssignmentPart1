@@ -484,11 +484,9 @@ public class MessageTest {
     @Test
     public void testGetStoredMessage() {
         System.out.println("getStoredMessage");
-        int index = 0;
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getStoredMessage(index);
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_2, MSG_2, 1);
+        Message.recordMessage(instance, "Stored");
+        assertNotNull(instance.getStoredMessage(0));
        }
 
     /**
@@ -497,11 +495,9 @@ public class MessageTest {
     @Test
     public void testGetMessageHash_int() {
         System.out.println("getMessageHash");
-        int index = 0;
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getMessageHash(index);
-        assertEquals(expResult, result);
+        Message instance = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(instance, "Sent");
+        assertNotNull(instance.getMessageHash(0));
        }
 
     /**
@@ -510,11 +506,9 @@ public class MessageTest {
     @Test
     public void testGetMessageId_int() {
         System.out.println("getMessageId");
-        int index = 0;
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getMessageId(index);
-        assertEquals(expResult, result);
+       Message instance = new Message(REC_1, MSG_1, 0);
+        Message.recordMessage(instance, "Sent");
+        assertNotNull(instance.getMessageId(0));
        }
     
 }
