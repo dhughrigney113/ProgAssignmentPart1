@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -116,13 +117,33 @@ public void storeMessage(){
             + "\"RecipientCell\":\"" +RecipientCell +"\","
             + "\"message\":\"" + MessageText.replace("\"", "\\\"") + "\""
                     + "}";
+          List<String> objects = new ArrayList<>();
 
-          try (FileWriter writer = new FileWriter("messages.json", true)) {
-            writer.write(json + System.lineSeparator());
-        } catch (IOException e) {
-            System.out.println("Error storing message: " + e.getMessage());
+        try {
+        if (Files.exists(Paths.get(jsonFilePath))) {
+            for (String line : Files.readAllLines(Paths.get(jsonFilePath))) {
+                line = line.trim();
+                if (line.startsWith("{")) {
+                    if (line.endsWith(",")) {
+                        line = line.substring(0, line.length() - 1);
+                    }
+                    objects.add(line);
+                }
+            }
         }
+        objects.add(json);
+
+         List<String> out = new ArrayList<>();
+        out.add("[");
+        for (int i = 0; i < objects.size(); i++) {
+            out.add(objects.get(i) + (i < objects.size() - 1 ? "," : ""));
+        }
+        out.add("]");
+        Files.write(Paths.get(jsonFilePath), out);
+    } catch (IOException e) {
+        System.out.println("Error storing message: " + e.getMessage());
     }
+}
  public String getMessageId() { return MessageID; }
     public String getMessageHash() { return MessageHash; }
 
